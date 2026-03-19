@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Article Viewer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-left">
+            <h1 class="header-title">Article Viewer</h1>
+            <span class="header-date">Updated March 19, 2026</span>
+        </div>
+        <nav class="grade-tabs" id="gradeTabs"></nav>
+    </header>
+
+    <main class="layout">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <input type="text" class="search-input" id="searchInput" placeholder="Search articles...">
+            </div>
+            <div class="article-list" id="articleList">
+                <p class="placeholder-text">Select a grade to browse articles.</p>
+            </div>
+        </aside>
+
+        <section class="content" id="content">
+            <div class="placeholder-text" id="contentPlaceholder">
+                <h2>Welcome to Article Viewer</h2>
+                <p>Select a grade level above, then choose an article from the sidebar to view its content and questions.</p>
+            </div>
+            <article class="article-view" id="articleView" style="display:none">
+                <h2 class="article-title" id="articleTitle"></h2>
+                <div class="article-meta" id="articleMeta"></div>
+
+                <div class="passage-container" id="passageContainer" style="display:none">
+                    <h3 class="section-heading">Reading Passage</h3>
+                    <div class="passage" id="passageContent"></div>
+                </div>
+
+                <div class="questions-container" id="questionsContainer">
+                    <h3 class="section-heading">Questions</h3>
+                    <div id="questionsList"></div>
+                </div>
+            </article>
+        </section>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
