@@ -299,5 +299,20 @@ function escapeHtml(str) {
     return div.innerHTML;
 }
 
+// Handle URL hash for deep linking (e.g., #grade=5)
+function handleHash() {
+    const hash = window.location.hash;
+    const match = hash.match(/grade=(\d+)/);
+    if (match) {
+        const grade = parseInt(match[1]);
+        if (GRADES.includes(grade)) {
+            selectGrade(grade);
+            return true;
+        }
+    }
+    return false;
+}
+
 // Initialize
 initTabs();
+handleHash();
