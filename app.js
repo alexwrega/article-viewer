@@ -308,9 +308,19 @@ function renderArticle(assessment) {
     content.scrollTop = 0;
 }
 
+// Utility: extract text from QTI values that may be strings, arrays, or objects
+function extractText(val) {
+    if (!val) return '';
+    if (typeof val === 'string') return val;
+    if (Array.isArray(val)) return val.map(v => typeof v === 'object' && v._ ? v._ : (typeof v === 'string' ? v : '')).join(' ');
+    if (typeof val === 'object' && val._) return val._;
+    return String(val);
+}
+
 // Utility: escape HTML
 function escapeHtml(str) {
     if (!str) return '';
+    str = extractText(str);
     const div = document.createElement('div');
     div.textContent = str;
     return div.innerHTML;
