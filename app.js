@@ -274,8 +274,25 @@ function renderArticle(assessment) {
                 : item._sectionTitle.toLowerCase() === 'quiz' ? 'Quiz'
                 : '';
 
+            // Build standards tag HTML
+            const meta = item.metadata || {};
+            const ccssValues = meta.ccss || meta.CCSS || [];
+            const ccssArr = Array.isArray(ccssValues) ? ccssValues : (ccssValues ? [ccssValues] : []);
+            const dok = meta.dok || meta.DOK;
+            const difficulty = meta.difficulty;
+
+            let standardsHtml = '';
+            if (ccssArr.length || dok || difficulty) {
+                const tags = [];
+                ccssArr.forEach(s => tags.push(`<span class="standard-tag">${escapeHtml(String(s))}</span>`));
+                if (dok) tags.push(`<span class="standard-tag dok">DOK ${escapeHtml(String(dok))}</span>`);
+                if (difficulty) tags.push(`<span class="standard-tag difficulty">${escapeHtml(String(difficulty))}</span>`);
+                standardsHtml = `<div class="standards-box">${tags.join('')}</div>`;
+            }
+
             card.innerHTML = `
                 <div class="question-number">${sectionTag ? sectionTag + ' — ' : ''}Question ${questionNum}${typeLabel ? ' — ' + typeLabel : ''}</div>
+                ${standardsHtml}
                 <div class="question-prompt">${escapeHtml(item.prompt || 'No prompt available')}</div>
                 ${choicesHtml}
             `;
